@@ -39,3 +39,20 @@ module "eks" {
   vpc-cni-version       = var.vpc-cni-version
   kube-proxy-version    = var.kube-proxy-version
 }
+
+# Creating EKS Client EC2 (Bastion)
+resource "aws_instance" "eks_client" {
+  ami                         = var.ec2_ami_id
+  instance_type               = var.ec2_instance_type
+  subnet_id                   = module.vpc.public_subnet_az1_id
+  vpc_security_group_ids      = [module.security_groups.bastion_sg_id] # or create a new one
+  key_name                    = var.key_name
+
+  associate_public_ip_address = true
+
+  tags = {
+    Name        = "${var.cluster_name}-eks-client"
+    Environment = var.env
+    Type        = var.type
+  }
+}
