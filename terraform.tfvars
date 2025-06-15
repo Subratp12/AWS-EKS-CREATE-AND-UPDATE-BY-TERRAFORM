@@ -1,6 +1,6 @@
 cluster_name       = "prod-cluster"
 instance_count     = 2
-instance_size      = "t2.large"
+instance_size      = "t2.medium"
 region             = "us-east-1"
 cluster_version    ="1.29"                        #   "1.30"  #
 ec2_ami_id         = "ami-09e6f87a47903347c"      #"ami-003271feb17a044df"#
